@@ -22,6 +22,10 @@ public class HomePage {
 		webDriver.navigate().to(url);
 	}
 	
+	public void get(String url) {
+		webDriver.get(url);
+	}
+	
 	public String getTitle() {
 		return webDriver.getTitle();
 	}

@@ -15,7 +15,7 @@ public abstract class AbstractTest {
 		System.setProperty("webdriver.chrome.driver","./drivers/chromedriver.exe");
 		
 		homepage = new HomePage(new ChromeDriver());
-		homepage.navigate(url);
+		homepage.get(url);
 	}
 	
 	@AfterTest
