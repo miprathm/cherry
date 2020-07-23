@@ -16,4 +16,22 @@ public class HomePage {
 	
 	@FindBy(xpath="//div[contains(text(),'Deposits')]")
 	WebElement deposit;
+	
+	
+	public void navigate(String url) {
+		webDriver.navigate().to(url);
+	}
+	
+	public String getTitle() {
+		return webDriver.getTitle();
+	}
+	
+	public void tearDown() {
+		try {
+			this.webDriver.quit();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 }
