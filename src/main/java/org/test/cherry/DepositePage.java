@@ -27,10 +27,11 @@ public class DepositePage {
 	
 	
 	public WebElement getElementOfAmountField() {
-		new WebDriverWait(webDriver, 10).until(ExpectedConditions.visibilityOf(fixDepositeAmtView));		
+		WebDriverWait wait = new WebDriverWait(webDriver, 10);
+		
+		wait.until(ExpectedConditions.visibilityOf(fixDepositeAmtView));		
 		fixDepositeAmtView.click();
-		new WebDriverWait(webDriver, 10)
-				.until(ExpectedConditions
+		wait.until(ExpectedConditions
 						.visibilityOf(fixDepositeAmtInput));
 		
 		return fixDepositeAmtInput;
