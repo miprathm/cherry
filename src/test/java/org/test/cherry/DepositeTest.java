@@ -45,6 +45,11 @@ public class DepositeTest extends AbstractTest {
 		
 	}
 	
+	@Test
+	public void validateFixedDepositeAmount() {
+		
+	}
+	
 	
 	public void verifyimageActive(WebElement imgElement) {
 		try {
