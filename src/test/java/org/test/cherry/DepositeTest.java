@@ -5,6 +5,8 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import utility.Utility;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
@@ -76,21 +78,20 @@ public class DepositeTest extends AbstractTest {
 
 	@Test(priority = 3, dataProvider = "getData")
 	public void validateInterest(String amt, String interest_plan, String interest_rate, String payout,String formula) {
-		System.out.println(amt + " " + interest_plan + " " + interest_rate + " " + payout);
+		System.out.println(amt + " " + payout);
+		
+		getWebDriver().manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		
 		Actions actions = new Actions(getWebDriver());
-		
-		actions.click().build().perform();
-		
-		System.out.println("In validate Interest");
-		
 		WebElement depositeAmtField = depositePage.getElementOfAmountField();
 		depositeAmtField.clear();
 		depositeAmtField.sendKeys(amt);
-
 		actions.click().build().perform();
 
-		System.out.println(depositePage.getMaturityAmt());
-		//Assert.assertEquals(depositePage.getValidationMessage(), "Minimum: 10000");
+		//System.out.println(depositePage.getMaturityAmt());
+		double intPayout = Double.parseDouble(payout);
+		
+		Assert.assertEquals(Utility.getDoubleFromString(depositePage.getMaturityAmt()),intPayout);
 
 		
 	}

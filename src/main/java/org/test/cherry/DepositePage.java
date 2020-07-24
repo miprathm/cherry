@@ -58,4 +58,8 @@ public class DepositePage {
 		return maturityAmount.getText();
 	}
 	
+	public void waitTillOverlayDisappear() {
+		
+	}
+	
 }

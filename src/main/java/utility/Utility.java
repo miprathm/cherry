@@ -5,6 +5,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
@@ -72,5 +74,17 @@ public class Utility {
 		}
 		return sample_data;
 
+	}
+	
+	public static double getDoubleFromString(String value) {
+		Pattern p = Pattern.compile("(\\d+)");
+		Matcher m = p.matcher(value);
+		String convertedValue= "";
+		int k=1;
+		while(m.find()) {
+			convertedValue += m.group(1);
+		}
+		return Double.parseDouble(convertedValue);
+		
 	}
 }
