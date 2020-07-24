@@ -1,5 +1,6 @@
 package org.test.cherry;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -26,8 +27,6 @@ public class DepositeTest extends AbstractTest {
 		
 		// get all image link
 		// check all broken links
-
-		System.out.println("Tot");
 		try {
 			int invalidImageCount = 0;
 			List<WebElement> imagesList = homepage.image_tags;
@@ -42,7 +41,10 @@ public class DepositeTest extends AbstractTest {
 			e.printStackTrace();
 			System.out.println(e.getMessage());
 		}
+		Assert.assertEquals(invalidImageCount, 0);
+		
 	}
+	
 	
 	public void verifyimageActive(WebElement imgElement) {
 		try {
