@@ -3,6 +3,8 @@ package org.test.cherry;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import net.bytebuddy.implementation.bind.annotation.BindingPriority;
+
 import java.util.List;
 
 import org.apache.http.HttpResponse;
@@ -20,7 +22,7 @@ public class DepositeTest extends AbstractTest {
 	int invalidImageCount;
 	DepositePage depositePage;
 	
-	@Test
+	@Test(priority=1)
 	public void checkBrokenImage() {
 		// Assert.assertEquals(homepage.getTitle(),"Kotak-IECO");
 		
@@ -48,7 +50,7 @@ public class DepositeTest extends AbstractTest {
 		
 	}
 	
-	@Test
+	@Test(priority=2)
 	public void validateFixedDepositeAmount() {
 		
 		homepage.fixedDeposite.click();
@@ -77,8 +79,10 @@ public class DepositeTest extends AbstractTest {
 		//getWebDriver().
 		
 		depositeAmtField.sendKeys("100");
-		
-		
+	}
+	
+	@Test(priority=3)
+	public void validateInterest() {
 		
 	}
 	
