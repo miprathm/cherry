@@ -20,17 +20,18 @@ public class DepositePage {
 	@FindBy(xpath="//ieco-app-fixed-deposit[1]/div[1]/section[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/span[1]/b[1]")
 	WebElement fixDepositeAmtView;
 	
-	//@FindBy(css="")
-	//WebElement fixDepositeAmtInput;
+	@FindBy(xpath="//input[@name='investedAmt']")
+	WebElement fixDepositeAmtInput;
+	
+	
 	
 	
 	public WebElement getElementOfAmountField() {
-		WebElement element = new WebDriverWait(webDriver, 10).until(ExpectedConditions.visibilityOf(fixDepositeAmtView));		
-		element.click();
-		WebElement fixDepositeAmtInput = new WebDriverWait(webDriver, 10)
+		new WebDriverWait(webDriver, 10).until(ExpectedConditions.visibilityOf(fixDepositeAmtView));		
+		fixDepositeAmtView.click();
+		new WebDriverWait(webDriver, 10)
 				.until(ExpectedConditions
-						.visibilityOfElementLocated(
-								By.xpath("//input[@name='investedAmt']")));
+						.visibilityOf(fixDepositeAmtInput));
 		
 		return fixDepositeAmtInput;
 	}
