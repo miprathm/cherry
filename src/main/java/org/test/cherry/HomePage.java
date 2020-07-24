@@ -1,9 +1,15 @@
 package org.test.cherry;
 
+import java.util.List;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class HomePage {
 	
@@ -17,6 +23,9 @@ public class HomePage {
 	@FindBy(xpath="//div[contains(text(),'Deposits')]")
 	WebElement deposit;
 	
+	@FindBys({@FindBy(tagName="img")})
+	List<WebElement> image_tags;
+	
 	
 	public void navigate(String url) {
 		webDriver.navigate().to(url);
@@ -28,6 +37,11 @@ public class HomePage {
 	
 	public String getTitle() {
 		return webDriver.getTitle();
+	}
+	
+	public void clickDepositeTab() {
+		WebElement element = new WebDriverWait(webDriver, 20).until(ExpectedConditions.visibilityOf(deposit));
+		element.click();
 	}
 	
 	public void tearDown() {
