@@ -1,35 +1,29 @@
 package org.test.cherry;
 
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
-import net.bytebuddy.implementation.bind.annotation.BindingPriority;
-
+import utility.Utility;
 import java.util.List;
-
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
 
 public class DepositeTest extends AbstractTest {
 
 	int invalidImageCount;
 	DepositePage depositePage;
-	
-	@Test(priority=1)
+
+	@Test(priority = 1)
 	public void checkBrokenImage() {
 		// Assert.assertEquals(homepage.getTitle(),"Kotak-IECO");
-		
-		
+
 		// Click on Deposite tab
 		homepage.clickDepositeTab();
-		
+
 		// get all image link
 		// check all broken links
 		try {
@@ -47,46 +41,66 @@ public class DepositeTest extends AbstractTest {
 			System.out.println(e.getMessage());
 		}
 		Assert.assertEquals(invalidImageCount, 0);
-		
+
 	}
-	
-	@Test(priority=2)
+
+	@Test(priority = 2)
 	public void validateFixedDepositeAmount() {
-		
+
 		homepage.fixedDeposite.click();
-		
+
 		depositePage = new DepositePage(getWebDriver());
-		
+
 		WebElement depositeAmtField = depositePage.getElementOfAmountField();
 		depositeAmtField.clear();
 		depositeAmtField.sendKeys("100");
-		
+
 		Actions actions = new Actions(getWebDriver());
-		
+
 		actions.doubleClick().click().build().perform();
-		
+
 		Assert.assertEquals(depositePage.getValidationMessage(), "Minimum: 10000");
-		
-		
+
 		depositeAmtField.clear();
-		
+
 		depositeAmtField.sendKeys("200000");
-		
+
 		actions.doubleClick().build().perform();
-		
+
 		Assert.assertEquals(depositePage.getValidationMessage(), "Maximum: 100000");
-		
-		//getWebDriver().
-		
+
+		// getWebDriver().
+
 		depositeAmtField.sendKeys("100");
 	}
-	
-	@Test(priority=3)
-	public void validateInterest() {
+
+	@Test(priority = 3, dataProvider = "getData")
+	public void validateInterest(String amt, String interest_plan, String interest_rate, String payout,String formula) {
+		System.out.println(amt + " " + interest_plan + " " + interest_rate + " " + payout);
+		Actions actions = new Actions(getWebDriver());
+		
+		actions.click().build().perform();
+		
+		System.out.println("In validate Interest");
+		
+		WebElement depositeAmtField = depositePage.getElementOfAmountField();
+		depositeAmtField.clear();
+		depositeAmtField.sendKeys(amt);
+
+		actions.click().build().perform();
+
+		System.out.println(depositePage.getMaturityAmt());
+		//Assert.assertEquals(depositePage.getValidationMessage(), "Minimum: 10000");
+
 		
 	}
-	
-	
+
+	@DataProvider
+	public Object[][] getData() {
+		return Utility.getAmountSampleData();
+
+	}
+
 	public void verifyimageActive(WebElement imgElement) {
 		try {
 			HttpClient client = HttpClientBuilder.create().build();
