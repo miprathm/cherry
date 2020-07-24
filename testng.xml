@@ -3,7 +3,7 @@
 <suite name="Suite">
 	<parameter name="url"
 		value="https://iecouat.kotakcherry.com/ieco/#/home" />
-	<test thread-count="5" name="Test">
+	<test thread-count="1" name="Test">
 		<classes>
 			<class name="org.test.cherry.DepositeTest" />
 		</classes>

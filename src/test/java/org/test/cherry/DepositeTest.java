@@ -16,6 +16,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class DepositeTest extends AbstractTest {
 
 	int invalidImageCount;
+	DepositePage depositePage;
 	
 	@Test
 	public void checkBrokenImage() {
@@ -47,6 +48,12 @@ public class DepositeTest extends AbstractTest {
 	
 	@Test
 	public void validateFixedDepositeAmount() {
+		
+		homepage.fixedDeposite.click();
+		
+		depositePage = new DepositePage(getWebDriver());
+		
+		depositePage.getElementOfAmountField().sendKeys("100");
 		
 	}
 	

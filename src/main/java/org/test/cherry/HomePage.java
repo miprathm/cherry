@@ -26,6 +26,9 @@ public class HomePage {
 	@FindBys({@FindBy(tagName="img")})
 	List<WebElement> image_tags;
 	
+	@FindBy(css="mat-card.ieco-example-card:first-of-type")
+	WebElement fixedDeposite;
+	
 	
 	public void navigate(String url) {
 		webDriver.navigate().to(url);
