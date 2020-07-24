@@ -10,6 +10,8 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 
@@ -53,7 +55,30 @@ public class DepositeTest extends AbstractTest {
 		
 		depositePage = new DepositePage(getWebDriver());
 		
-		depositePage.getElementOfAmountField().sendKeys("100");
+		WebElement depositeAmtField = depositePage.getElementOfAmountField();
+		depositeAmtField.clear();
+		depositeAmtField.sendKeys("100");
+		
+		Actions actions = new Actions(getWebDriver());
+		
+		actions.doubleClick().click().build().perform();
+		
+		Assert.assertEquals(depositePage.getValidationMessage(), "Minimum: 10000");
+		
+		
+		depositeAmtField.clear();
+		
+		depositeAmtField.sendKeys("200000");
+		
+		actions.doubleClick().build().perform();
+		
+		Assert.assertEquals(depositePage.getValidationMessage(), "Maximum: 100000");
+		
+		//getWebDriver().
+		
+		depositeAmtField.sendKeys("100");
+		
+		
 		
 	}
 	
