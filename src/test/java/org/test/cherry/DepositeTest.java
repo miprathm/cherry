@@ -71,9 +71,6 @@ public class DepositeTest extends AbstractTest {
 
 		Assert.assertEquals(depositePage.getValidationMessage(), "Maximum: 100000");
 
-		// getWebDriver().
-
-		depositeAmtField.sendKeys("100");
 	}
 
 	@Test(priority = 3, dataProvider = "getData")
